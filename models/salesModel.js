@@ -10,7 +10,7 @@ const getAllSalesModel = async () => {
     ON s.id = sp.sale_id
   `;
 
-  const [saleId] = connection.execute(query);
+  const [saleId] = await connection.execute(query);
 
   return saleId;
 };
