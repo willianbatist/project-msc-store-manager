@@ -6,6 +6,13 @@ const getAllControllerProducts = async (_req, res) => {
   return res.status(200).json(products);
 };
 
+const getProductId = async (req, res) => {
+  const { id } = req.param;
+  const productId = await productsServices.getProductId(id);
+  return res.status(200).json(productId);
+};
+
 module.exports = {
   getAllControllerProducts,
+  getProductId,
 };
