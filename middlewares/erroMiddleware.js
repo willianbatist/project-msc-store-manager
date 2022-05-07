@@ -1,6 +1,6 @@
-const erroHandler = (status, message) => ({
-    status,
-    message,
+const erroHandler = (codeStatus, erroMessage) => ({
+    status: codeStatus,
+    message: erroMessage,
   });
 
 module.exports = {

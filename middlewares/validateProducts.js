@@ -1,16 +1,23 @@
-// // Middleware
-// const Joi = require('joi');
-const erroMiddleware = require('./erroMiddleware');
+const Joi = require('joi');
 
-// const ID = Joi.object({
-//   id: Joi.required(),
-// });
+const PRODUCT = Joi.object({
+  name: Joi.string().min(5).max(30).required(),
+  quantity: Joi.number().min(1).required(),
+});
 
-const validateProductNotFound = (product) => {
-  if (product.length === 0) return erroMiddleware.erroHandler(404, 'Product not found');
-  return false;
+const validateProduct = (req, res, next) => {
+  try {
+    const { name } = req.body;
+    const { error } = PRODUCT.validate({ name });
+  if (error) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+  return next();
+  } catch (error) {
+    return res.status(400).send({ error: error.message });
+  }
 };
 
 module.exports = {
-  validateProductNotFound,
+  validateProduct,
 };
