@@ -13,7 +13,7 @@ const getProductId = async (id) => {
 
   const [products] = await connection.execute(query, [id]);
 
-  return products;
+  return products[0];
 };
 
 module.exports = {

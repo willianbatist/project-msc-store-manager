@@ -1,5 +1,4 @@
 const salesModel = require('../models/salesModel');
-const { erroHandler } = require('../middlewares/erroMiddleware');
 
 const getAllServiceSales = async () => {
   const sales = await salesModel.getAllSalesModel();
@@ -8,7 +7,7 @@ const getAllServiceSales = async () => {
 
 const getSalesId = async (id) => {
   const salesId = await salesModel.getSalesId(id);
-  if (salesId.length === 0) return erroHandler(404, 'Sale not found');
+  if (salesId.length === 0) return false;
   return salesId;
 };
 
