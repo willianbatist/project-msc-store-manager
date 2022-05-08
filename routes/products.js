@@ -10,4 +10,6 @@ validateProducts.productAvailable, productsController.createProduct);
 
 router.put('/:id', validateProducts.idAvailable, productsController.updateProducts);
 
+router.delete('/:id', productsController.deleteProduct);
+
 module.exports = router;
