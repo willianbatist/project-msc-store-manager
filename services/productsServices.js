@@ -1,5 +1,4 @@
 const productsModel = require('../models/productsModel');
-// const { erroHandler } = require('../middlewares/erroMiddleware');
 
 const getAllServiceProducts = async () => {
   const products = await productsModel.getAllModelProducts();
@@ -13,7 +12,13 @@ const getProductId = async (id) => {
   return productId;
 };
 
+const createProduct = async (nam, quantity) => {
+  const create = await productsModel.createProduct(nam, quantity);
+  return create;
+};
+
 module.exports = {
   getAllServiceProducts,
   getProductId,
+  createProduct,
 };

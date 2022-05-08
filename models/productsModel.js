@@ -16,7 +16,24 @@ const getProductId = async (id) => {
   return products[0];
 };
 
+const createProduct = async (name, quantity) => {
+  const query = 'INSERT INTO products (name, quantity) VALUES (?, ?)';
+
+  const [create] = await connection.execute(query, [name, quantity]);
+
+  return create;
+};
+
+const getModelName = async (name) => {
+  const query = 'SELECT name FROM products WHERE name = ?';
+  const [getName] = await connection.execute(query, [name]);
+
+  return getName;
+};
+
 module.exports = {
   getAllModelProducts,
   getProductId,
+  createProduct,
+  getModelName,
 };
