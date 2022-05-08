@@ -1,4 +1,4 @@
-const { getModelName } = require('../models/productsModel');
+const { getModelName, getProductId } = require('../models/productsModel');
 
 const validateProduct = async (req, res, next) => {
   try {
@@ -19,6 +19,20 @@ const validateProduct = async (req, res, next) => {
   }
 };
 
+const idAvailable = async (req, res, next) => {
+  try {
+  const { id } = req.params;
+  const getId = await getProductId(id);
+  if (!getId) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  return next();
+  } catch (error) {
+    return res.status(400).send({ error: error.message });
+  }
+};
+
 module.exports = {
   validateProduct,
+  idAvailable,
 };
