@@ -19,8 +19,8 @@ const insertSalesProduct = async (body) => {
 };
 
 const updateSales = async (id, body) => {
-  body.forEach(({ productId, quantity }) => salesModel.updateSales(productId, quantity, id));
-  return { id, itemUpdated: body };
+  body.forEach(({ productId, quantity }) => salesModel.updateSales(quantity, productId, id));
+  return { saleId: id, itemUpdated: body };
 };
 
 module.exports = {
