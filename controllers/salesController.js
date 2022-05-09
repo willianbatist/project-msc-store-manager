@@ -12,7 +12,20 @@ const getSalesId = async (req, res) => {
   return res.status(200).json(salesId);
 };
 
+const insertSalesProduct = async (req, res) => {
+  const { id } = await salesServices.insertSales();
+  req.body.forEach(async ({ productId, quantity }) => { 
+    await salesServices.insertSalesProduct(id, productId, quantity);
+  });
+  const obj = {
+    id,
+    itemsSold: req.body,
+  };
+  return res.status(201).json(obj);
+};
+
 module.exports = {
   getAllControllerSales,
   getSalesId,
+  insertSalesProduct,
 };
