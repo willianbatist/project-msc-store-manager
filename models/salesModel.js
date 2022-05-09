@@ -30,6 +30,10 @@ const getSalesId = async (id) => {
   return salesId;
 };
 
+// const getSalesAllId = () => {
+//   const query =
+// };
+
 const insertSales = async () => {
   const query = `
   INSERT INTO StoreManager.sales (date) VALUES (NOW());

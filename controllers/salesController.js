@@ -13,11 +13,7 @@ const getSalesId = async (req, res) => {
 };
 
 const insertSalesProduct = async (req, res) => {
-  req.body.forEach(async ({ productId, quantity }) => salesServices
-  .insertSalesProduct(productId, quantity));
-  const obj = {
-    itemsSold: req.body,
-  };
+  const obj = await salesServices.insertSalesProduct(req.body);
   return res.status(201).json(obj);
 };
 

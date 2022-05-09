@@ -11,10 +11,11 @@ const getSalesId = async (id) => {
   return salesId;
 };
 
-const insertSalesProduct = async (productId, quantity) => {
+const insertSalesProduct = async (body) => {
   const id = await salesModel.insertSales();
-  const insertAll = await salesModel.insertSalesProduct(id, productId, quantity);
-  return insertAll; 
+  body.forEach(async ({ productId, quantity }) => salesModel
+  .insertSalesProduct(id, productId, quantity));
+  return { id, itemsSold: body }; 
 };
 
 module.exports = {
