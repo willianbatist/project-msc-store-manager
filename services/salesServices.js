@@ -18,8 +18,14 @@ const insertSalesProduct = async (body) => {
   return { id, itemsSold: body }; 
 };
 
+const updateSales = async (id, body) => {
+  body.forEach(({ productId, quantity }) => salesModel.updateSales(productId, quantity, id));
+  return { id, itemUpdated: body };
+};
+
 module.exports = {
   getAllServiceSales,
   getSalesId,
   insertSalesProduct,
+  updateSales,
 };
