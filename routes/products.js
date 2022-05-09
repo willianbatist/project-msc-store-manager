@@ -7,10 +7,15 @@ router.get('/:id', productsController.getProductId);
 
 router.post('/', 
   validateProducts.validateName,
+  validateProducts.validateQuantity,
   validateProducts.productAvailable,
   productsController.createProduct);
 
-router.put('/:id', validateProducts.idAvailable, productsController.updateProducts);
+router.put('/:id',
+  validateProducts.validateName,
+  validateProducts.validateQuantity,
+  validateProducts.idAvailable,
+  productsController.updateProducts);
 
 router.delete('/:id', validateProducts.idAvailable, productsController.deleteProduct);
 
