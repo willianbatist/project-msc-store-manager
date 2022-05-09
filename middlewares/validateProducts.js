@@ -4,12 +4,25 @@ const validateName = async (req, res, next) => {
   try {
     const { name } = req.body;
     if (!name) {
-      console.log('entrou no if !name');
       return res.status(400).json({ message: '"name" is required' });
-      // return next({ status: 400, message: '"name" is required' });
     }
     if (name.length < 5) {
       return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+    }
+    return next();
+  } catch (error) {
+    return res.status(400).send({ error: error.message });
+  }
+};
+
+const validateQuantity = async (req, res, next) => {
+  try {
+    const { quantity } = req.body;
+    if (!quantity) {
+      return res.status(400).json({ message: '"quantity" is required' });
+    }
+    if (quantity >= 0) {
+      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
     }
     return next();
   } catch (error) {
@@ -47,4 +60,5 @@ module.exports = {
   validateName,
   idAvailable,
   productAvailable,
+  validateQuantity,
 };
