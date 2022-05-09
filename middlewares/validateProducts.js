@@ -1,13 +1,13 @@
 const { getModelName, getProductId } = require('../models/productsModel');
 
-const validateProduct = async (req, res, next) => {
+const validateName = async (req, res, next) => {
   try {
     const { name } = req.body;
-    // if (!name) {
-    //   console.log('entrou no if !name');
-    //   // return res.status(400).json({ message: '"name" is required' });
-    //   return next({ status: 400, message: '"name" is required' });
-    // }
+    if (!name) {
+      console.log('entrou no if !name');
+      return res.status(400).json({ message: '"name" is required' });
+      // return next({ status: 400, message: '"name" is required' });
+    }
     if (name.length < 5) {
       return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
     }
@@ -44,7 +44,7 @@ const idAvailable = async (req, res, next) => {
 };
 
 module.exports = {
-  validateProduct,
+  validateName,
   idAvailable,
   productAvailable,
 };

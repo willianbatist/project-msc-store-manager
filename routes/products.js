@@ -6,7 +6,7 @@ router.get('/', productsController.getAllControllerProducts);
 router.get('/:id', productsController.getProductId);
 
 router.post('/', 
-  validateProducts.validateProduct,
+  validateProducts.validateName,
   validateProducts.productAvailable,
   productsController.createProduct);
 
