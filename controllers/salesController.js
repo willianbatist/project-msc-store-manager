@@ -13,12 +13,9 @@ const getSalesId = async (req, res) => {
 };
 
 const insertSalesProduct = async (req, res) => {
-  const { id } = await salesServices.insertSales();
-  req.body.forEach(async ({ productId, quantity }) => { 
-    await salesServices.insertSalesProduct(id, productId, quantity);
-  });
+  req.body.forEach(async ({ productId, quantity }) => salesServices
+  .insertSalesProduct(productId, quantity));
   const obj = {
-    id,
     itemsSold: req.body,
   };
   return res.status(201).json(obj);

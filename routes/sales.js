@@ -5,7 +5,9 @@ const validateSales = require('../middlewares/validateSales');
 router.get('/', salesController.getAllControllerSales);
 router.get('/:id', salesController.getSalesId);
 
-router.post('/', validateSales.validateProduct, validateSales.validateQuantity);
+router.post('/', validateSales.validateProduct,
+validateSales.validateQuantity,
+salesController.insertSalesProduct);
 
 router.put('/:id', validateSales.validateProduct, validateSales.validateQuantity);
 

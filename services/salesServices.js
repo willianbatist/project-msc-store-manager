@@ -11,12 +11,8 @@ const getSalesId = async (id) => {
   return salesId;
 };
 
-const insertSales = async () => {
-  const { id } = await salesModel.insertSales();
-  return id;
-};
-
-const insertSalesProduct = async (id, productId, quantity) => {
+const insertSalesProduct = async (productId, quantity) => {
+  const id = await salesModel.insertSales();
   const insertAll = await salesModel.insertSalesProduct(id, productId, quantity);
   return insertAll; 
 };
@@ -25,5 +21,4 @@ module.exports = {
   getAllServiceSales,
   getSalesId,
   insertSalesProduct,
-  insertSales,
 };
