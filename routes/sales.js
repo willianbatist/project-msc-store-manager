@@ -9,6 +9,8 @@ router.post('/', validateSales.validateProduct,
 validateSales.validateQuantity,
 salesController.insertSalesProduct);
 
-router.put('/:id', validateSales.validateProduct, validateSales.validateQuantity);
+router.put('/:id', validateSales.validateProduct,
+validateSales.validateQuantity,
+salesController.updateSales);
 
 module.exports = router;
