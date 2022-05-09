@@ -11,7 +11,14 @@ const getSalesId = async (id) => {
   return salesId;
 };
 
+const insertSalesProduct = async (productId, quantity) => {
+  const { id } = await salesModel.insertSales();
+  const insertAll = await salesModel.insertSalesProduct(id, productId, quantity);
+  return insertAll; 
+};
+
 module.exports = {
   getAllServiceSales,
   getSalesId,
+  insertSalesProduct,
 };
