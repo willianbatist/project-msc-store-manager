@@ -56,15 +56,17 @@ const insertSalesProduct = async (id, sales) => {
   return { id, itemsSold: sales };
 };
 
-const updateSales = async (quantity, productId, saleId) => {
-  const query = `
-  UPDATE StoreManager.sales_products
-  SET quantity = ?, product_id = ?
-  WHERE sale_id = ?
-  `;
-  const [update] = await connection.execute(query, [quantity, productId, saleId]);
+const updateSales = async (id, body) => {
+  body.forEach(async ({ quantity, productId }) => {
+    const query = `
+    UPDATE StoreManager.sales_products
+    SET quantity = ?, product_id = ?
+    WHERE sale_id = ?
+    `;
+    await connection.execute(query, [quantity, productId, id]);
+  });
 
-  return update;
+  return { saleId: id, itemUpdated: body };
 };
 
 module.exports = {
