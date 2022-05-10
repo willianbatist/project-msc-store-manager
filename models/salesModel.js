@@ -62,9 +62,9 @@ const updateSales = async (id, body) => {
     const query = `
     UPDATE sales_products
     SET quantity = ?, product_id = ?
-    WHERE sale_id = ?
+    WHERE sale_id = ? AND product_id = ?
     `;
-    await connection.execute(query, [e.quantity, e.productId, id]);
+    await connection.execute(query, [e.quantity, e.productId, id, e.productId]);
   });
   // mudar o return que funciona no gitHub
   return {
