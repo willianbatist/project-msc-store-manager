@@ -57,16 +57,25 @@ const insertSalesProduct = async (id, sales) => {
 };
 
 const updateSales = async (id, body) => {
-  body.forEach(async ({ quantity, productId }) => {
+  const [{ productId, quantity }] = body;
+  body.forEach(async (e) => {
     const query = `
     UPDATE sales_products
     SET quantity = ?, product_id = ?
     WHERE sale_id = ?
     `;
-    await connection.execute(query, [quantity, productId, id]);
+    await connection.execute(query, [e.quantity, e.productId, id]);
   });
 
-  return { saleId: id, itemUpdated: body };
+  return {
+    saleId: id,
+    itemUpdated: [
+      {
+        productId,
+        quantity,
+      },
+    ],
+  };
 };
 
 module.exports = {
