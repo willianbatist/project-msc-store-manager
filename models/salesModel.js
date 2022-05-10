@@ -59,7 +59,7 @@ const insertSalesProduct = async (id, sales) => {
 const updateSales = async (id, body) => {
   body.forEach(async ({ quantity, productId }) => {
     const query = `
-    UPDATE StoreManager.sales_products
+    UPDATE sales_products
     SET quantity = ?, product_id = ?
     WHERE sale_id = ?
     `;
