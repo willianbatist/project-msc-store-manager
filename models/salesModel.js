@@ -57,7 +57,7 @@ const insertSalesProduct = async (id, sales) => {
 };
 
 const updateSales = async (id, body) => {
-  const [{ productId, quantity }] = body;
+  // const [{ productId, quantity }] = body;
   body.forEach(async (e) => {
     const query = `
     UPDATE sales_products
@@ -66,15 +66,10 @@ const updateSales = async (id, body) => {
     `;
     await connection.execute(query, [e.quantity, e.productId, id]);
   });
-
+  // mudar o return que funciona no gitHub
   return {
     saleId: id,
-    itemUpdated: [
-      {
-        productId,
-        quantity,
-      },
-    ],
+    itemUpdated: body,
   };
 };
 
