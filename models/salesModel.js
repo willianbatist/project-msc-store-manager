@@ -43,16 +43,17 @@ const insertSales = async () => {
   return insert.insertId;
 };
 
-const insertSalesProduct = async (saleId, productId, quantity) => {
-  const query = `
+const insertSalesProduct = async (id, sales) => {
+  sales.forEach(async ({ productId, quantity }) => {
+    const query = `
   INSERT INTO 
     sales_products (sale_id, product_id, quantity) 
   VALUES
   (?, ?, ?)`;
+    await connection.execute(query, [id, productId, quantity]);
+  });
 
-  const [insert] = await connection.execute(query, [saleId, productId, quantity]);
-
-  return insert;
+  return { id, itemsSold: sales };
 };
 
 const updateSales = async (quantity, productId, saleId) => {
