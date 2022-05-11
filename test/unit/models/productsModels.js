@@ -65,14 +65,24 @@ describe('Camada Model, Testando  productsServices', () => {
       connection.execute.restore();
     })
 
-    it('o produto buscado no BD apresenta ID', async () =>{
+    it('o produto buscado no BD apresenta id, name e quantity do produto', async () =>{
       const result = await productsModel.getProductId(1);
-      console.log(result);
+
       expect(result).to.be.includes.all.keys(
       'id',
       'name',
       'quantity'
     )
     })
+
+    it('a função busca no BD o ID especificado', async () =>{
+      const result = await productsModel.getProductId(1);
+
+      expect(result).to.deep.include( { id: 1 } );
+    })
   })
+
+  describe('', () => {
+    
+  });
 });
