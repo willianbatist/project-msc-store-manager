@@ -47,4 +47,32 @@ describe('Camada Model, Testando  productsServices', () => {
       )
     })
   });
+
+  describe('Busca de produtos por ID', () => {
+    const resultExecute = [
+      {
+        "id": 1,
+        "name": "Martelo de Thor",
+        "quantity": 10
+      }
+    ];
+
+    before(() => {
+      sinon.stub(connection, 'execute')
+        .resolves(resultExecute)
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+
+    it('o produto buscado no BD apresenta ID', async () =>{
+      const result = await productsModel.getProductId(1);
+      console.log(result);
+      expect(result).to.be.includes.all.keys(
+      'id',
+      'name',
+      'quantity'
+    )
+    })
+  })
 });
