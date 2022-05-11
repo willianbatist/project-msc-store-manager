@@ -43,6 +43,9 @@ describe('Camada Service, Testando Products Service', () => {
   })
 
   describe('Testando retorno da getProductId em services', () => {
-    
+    it('retorne false se o produto não se encontra no bando de dados', async () => {
+      const result = await productsServices.getProductId(10);
+      expect(result).to.be.a('boolean');
+    })
   });
 });
