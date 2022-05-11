@@ -47,5 +47,12 @@ describe('Camada Service, Testando Products Service', () => {
       const result = await productsServices.getProductId(10);
       expect(result).to.be.a('boolean');
     })
+
+    it('retorne id caso produto seja cadastrado', async () => {
+      const name = 'Produto';
+      const quantity = 10;
+      const result = await productsServices.createProduct(name, quantity);
+      expect(result).to.have.a.property('id');
+    });
   });
 });
