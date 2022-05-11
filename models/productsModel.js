@@ -21,7 +21,7 @@ const createProduct = async (name, quantity) => {
 
   const [create] = await connection.execute(query, [name, quantity]);
 
-  return create;
+  return create.insertId;
 };
 
 const getModelName = async (name) => {
