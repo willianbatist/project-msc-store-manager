@@ -47,7 +47,7 @@ const idAvailable = async (req, res, next) => {
   try {
   const { id } = req.params;
   const getId = await getProductId(id);
-  if (!getId) {
+  if (!getId[0]) {
     return res.status(404).json({ message: 'Product not found' });
   }
   return next();
