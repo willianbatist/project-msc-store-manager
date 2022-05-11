@@ -14,10 +14,9 @@ const getProductId = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const products = await productsServices.getAllServiceProducts();
   const { name, quantity } = req.body;
-  await productsServices.createProduct(name, quantity);
-  return res.status(201).json({ id: products.length + 1, name, quantity });
+  const id = await productsServices.createProduct(name, quantity);
+  return res.status(201).json({ id, name, quantity });
 };
 
 const updateProducts = async (req, res) => {
