@@ -7,7 +7,8 @@ const getAllServiceProducts = async () => {
 };
 
 const getProductId = async (id) => {
-  const productId = await productsModel.getProductId(id);
+  const [productId] = await productsModel.getProductId(id);
+
   if (!productId) return false;
   return productId;
 };
