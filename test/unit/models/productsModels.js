@@ -82,7 +82,26 @@ describe('Camada Model, Testando  productsServices', () => {
     })
   })
 
-  describe('', () => {
-    
+  describe('Busca de produtos pelo name', () => {
+    const resultExecute = [
+      {
+        "id": 2,
+        "name": "Traje de encolhimento",
+        "quantity": 20
+      }
+    ];
+
+    before(() => {
+      sinon.stub(connection, 'execute')
+        .resolves(resultExecute)
+    })
+    after(() => {
+      connection.execute.restore();
+    })
+
+    it('Retorna com sucesso o produto buscado pelo nome', async () =>{
+      const result = await productsModel.getModelName('Traje de encolhimento');
+      expect(result).to.deep.include( { name: 'Traje de encolhimento' } );
+    })
   });
 });
