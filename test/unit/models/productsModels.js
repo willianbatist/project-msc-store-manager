@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const connection = require('../../../models/connection');
 const productsModel = require('../../../models/productsModel');
 
-describe('Camada Model, Testando  productsServices', () => {
+describe('Camada Model, Testando  productsModel', () => {
   describe('quando existem Produtos registrado no BD', () => {
     // it('', () =>{})
     // estrtura do BD [[{ id }]]
