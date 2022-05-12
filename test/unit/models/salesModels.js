@@ -50,14 +50,32 @@ describe('Camada Models, SalesModels', () => {
   connection.execute.restore();
   })
 
-  it('inserção da venda feita com sucesso', async () => {
+  it('inserção da sales feita com sucesso', async () => {
     const resultExecute = [{ insertId: 4 }];
     sinon.stub(connection, 'execute')
     .resolves(resultExecute)
 
     const result = await salesModel.insertSales();
-    console.log(result);
+
     expect(result).to.not.be.equal(undefined);
+    connection.execute.restore();
+  });
+
+  it('inserção da sales_products feita com sucesso', async () => {
+    const id = 1;
+    const array = [
+      {
+        "productId": 1,
+        "quantity": 3
+      }
+    ]
+    sinon.stub(connection, 'execute').resolves()
+    const result = await salesModel.insertSalesProduct(id, array)
+
+    expect(result).to.be.includes.all.keys(
+      'id',
+      'itemsSold'
+    )
     connection.execute.restore();
   });
 });
