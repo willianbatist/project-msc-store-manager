@@ -42,5 +42,25 @@ describe('Camada de Controller, Testando productsControllers', () => {
 
       expect(res.status.calledWith(200)).to.be.equal(true);
     });
+    describe('', () => {
+      const res = {};
+      const req = { params: { id : 1} };
+
+      before(() => {
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsServices, 'getProductId').resolves(1);
+      })
+  
+      after(() => {
+        productsServices.getProductId.restore();
+      });
+
+      it('Retorno status 200 para id do produto encontrado', async () => {
+        await productsControllers.getProductId(req, res);
+
+        expect(res.status.calledWith(200)).to.be.equal(true);
+      });
+    })
   });
 })
