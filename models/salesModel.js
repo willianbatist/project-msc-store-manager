@@ -11,7 +11,7 @@ const getAllSalesModel = async () => {
   `;
 
   const [sales] = await connection.execute(query);
-
+  console.log(sales);
   return sales;
 };
 
