@@ -28,6 +28,9 @@ describe('Camada Models, SalesModels', () => {
     sinon.stub(connection, 'execute')
     .resolves(resultExecute)
 
+    const result = await salesModel.getAllSalesModel();
+    expect(result).to.be.not.empty;
+
     connection.execute.restore();
   });
 });
