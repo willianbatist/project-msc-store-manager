@@ -44,15 +44,27 @@ describe('Camada Service, Testando Products Service', () => {
 
   describe('Testando retorno das funções de ProductsService em services', () => {
     it('retorne false se o produto não se encontra no bando de dados', async () => {
+      sinon.stub(connection, 'execute')
+          .resolves([[undefined]])
+
       const result = await productsServices.getProductId(10);
+
       expect(result).to.be.a('boolean');
+      connection.execute.restore();
     })
 
     it('retorne id caso produto seja cadastrado', async () => {
+
+        sinon.stub(connection, 'execute')
+          .resolves([{ insertId: 4 } ])
+
       const name = 'Produto';
       const quantity = 10;
       const result = await productsServices.createProduct(name, quantity);
-      expect(result).to.have.a.property('id');
+
+      expect(result.id).to.not.be.equal(undefined);
+
+      connection.execute.restore();
     });
   });
 });
