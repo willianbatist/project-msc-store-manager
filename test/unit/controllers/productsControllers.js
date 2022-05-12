@@ -42,6 +42,7 @@ describe('Camada de Controller, Testando productsControllers', () => {
 
       expect(res.status.calledWith(200)).to.be.equal(true);
     });
+  });
     describe('', () => {
       const res = {};
       const req = { params: { id : 1} };
@@ -62,5 +63,25 @@ describe('Camada de Controller, Testando productsControllers', () => {
         expect(res.status.calledWith(200)).to.be.equal(true);
       });
     })
-  });
+
+    describe('Ao chamar o controller de create', async () => {
+      const res = {};
+      const req = {};
+      req.body = { name: 'Produto', quantity: 79 }
+    before(() => {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon.stub(productsServices, 'createProduct').resolves({id: 4, name: 'Produto', quantity: 79});
+    })
+
+    after(() => {
+      productsServices.createProduct.restore();
+    });
+
+    it('é chamado o status com o código 201, quando criado com sucesso', async () => {
+      await productsControllers.createProduct(req, res);
+
+      expect(res.status.calledWith(201)).to.be.equal(true);
+    });
+    });
 })
